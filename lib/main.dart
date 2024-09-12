@@ -1,7 +1,6 @@
-import 'package:calc_app/pages/add_entries.dart';
-import 'package:calc_app/pages/add_expenses.dart';
 import 'package:calc_app/pages/home_page.dart';
 import 'package:calc_app/providers/ui_provider.dart';
+import 'package:calc_app/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,15 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      theme: ThemeData.dark().copyWith(
-        appBarTheme: AppBarTheme(backgroundColor: Colors.grey[900]),
-        bottomNavigationBarTheme: 
-        const BottomNavigationBarThemeData(selectedItemColor: Colors.green),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.green[800], foregroundColor: Colors.white),
-        scaffoldBackgroundColor: Colors.grey[900],
-        primaryColorDark: Colors.grey[850],
-      ),
+      theme: appTheme,
       initialRoute: 'home',
       routes: {
         'home': (_) => const HomePage(),
