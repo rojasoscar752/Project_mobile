@@ -1,7 +1,6 @@
 import 'package:calc_app/widgets/balance_page/back_sheet.dart';
 import 'package:calc_app/widgets/balance_page/custom_fab.dart';
 import 'package:calc_app/widgets/balance_page/front_sheet.dart';
-import 'package:calc_app/widgets/balance_page/my_sliver_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'dart:math';
@@ -29,6 +28,7 @@ class _BalancePageState extends State<BalancePage> {
   @override
   void initState() {
     _scrollController.addListener(_listener);
+    _max;
     super.initState();
   }
 
@@ -39,30 +39,49 @@ class _BalancePageState extends State<BalancePage> {
     super.dispose();
   }
 
-  double get _max => max(90 - _offset * 90, 0);
+  double get _max => max(90 - 90 * _offset, 0.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: const CustomFAB(),
       body: CustomScrollView(
-      controller: _scrollController,
-      slivers: [
-        const MySliverAppBar(),
-        SliverList(
-          delegate: SliverChildListDelegate([
+        controller: _scrollController,
+        slivers: [
+          const SliverAppBar(
+            elevation: 0.0,
+            expandedHeight: 120.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '\$ 50,000.00',
+                    style: TextStyle(
+                        color: Colors.green, fontSize: 30.0), // Color del texto
+                  ),
+                  Text(
+                    'Balance',
+                    style: TextStyle(fontSize: 14.0), // Color del texto
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
             Stack(
               children: [
                 const BackSheet(),
                 Padding(
                   padding: EdgeInsets.only(top: _max),
                   child: const FrontSheet(),
-                ),
+                )
               ],
-            ),
-          ]),
-        ),
-      ],
-    ));
+            )
+          ]))
+        ],
+      ),
+    );
   }
 }
